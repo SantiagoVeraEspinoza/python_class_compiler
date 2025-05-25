@@ -100,4 +100,8 @@ def parse_directory(path):
 
     return parse_results
 
-print(parse_directory('examples'))
+# results = parse_directory('examples/normal')
+# true_results = len([value for value in results.values() if value == True])
+# false_results = len(results) - true_results
+
+# print(f"Efectiveness: {true_results}/{len(results)}")

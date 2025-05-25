@@ -1,0 +1,1 @@
+print("mundo" in "Hola mundo")
