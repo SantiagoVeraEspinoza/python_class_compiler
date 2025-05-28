@@ -45,29 +45,29 @@ parse_table = {
 }
 
 # LL(1) Parser
-def parse(content, is_path=True, print_log=False):
+def parse(content, is_path=True, hide_output=True, hide_errors=False):
     tokens = lexer.tokenize(content, is_path) + ['$']
 
     stack = ['$', 'S']
     input_pos = 0
 
-    if print_log: print(f"{'Stack':<35} {'Input':<80} {'Action'}")
+    if not hide_output: print(f"{'Stack':<35} {'Input':<80} {'Action'}")
     while stack:
         top = stack.pop()
         current_token = tokens[input_pos]
 
-        if print_log: print(f"{str(stack):<35} {str([token[0:2] for token in tokens[input_pos:]]):<80} ", end='')
+        if not hide_output: print(f"{str(stack):<35} {str([token[0:2] for token in tokens[input_pos:]]):<80} ", end='')
 
         if top == current_token == '$':
-            if print_log: print("ACCEPT")
+            if not hide_output: print("ACCEPT")
             return True
 
         elif top in tokens:  # Terminal
             if top == current_token:
-                if print_log: print(f"Match {top}")
+                if not hide_output: print(f"Match {top}")
                 input_pos += 1
             else:
-                if print_log: print(f"Error: expected {top}, got {current_token}")
+                if not hide_errors: print(f"Error: expected {top}, got {current_token}")
                 return False
 
         elif top in parse_table:  # Non-terminal
@@ -75,19 +75,19 @@ def parse(content, is_path=True, print_log=False):
             if rule:
                 if rule[0] != 'e':
                     stack += reversed(rule)
-                if print_log: print(f"{top} → {' '.join(rule)}")
+                if not hide_output: print(f"{top} → {' '.join(rule)}")
             else:
-                if print_log: print(f"Error: no rule for {top} with lookahead {current_token}")
+                if not hide_errors: print(f"Error: no rule for {top} with lookahead {current_token}")
                 return False
         else:
-            if print_log: print(f"Unknown symbol on stack: {top}")
+            if not hide_errors: print(f"Error: Unknown symbol on stack: {top}")
             return False
 
     return False
 
-def parse_directory(path):
+def parse_directory(path, hide_output=True, hide_errors=True):
     if not os.path.exists(path or not os.path.isdir(path)):
-        raise FileNotFoundError(f"Unable to find path '{path}'. Provide a valid directory path")
+        raise FileNotFoundError(f"Error: Unable to find path '{path}'. Provide a valid directory path")
     
     parse_results = {}
     for file in os.listdir(path):
@@ -96,11 +96,11 @@ def parse_directory(path):
         if not os.path.exists(full_path) or not os.path.isfile(full_path):
             continue
 
-        parse_results[file] = parse(full_path, is_path=True)
+        parse_results[file] = parse(full_path, is_path=True, hide_output=hide_output, hide_errors=hide_errors)
 
     return parse_results
 
-# results = parse_directory('examples/normal')
+# results = parse_directory('examples/oop')
 # true_results = len([value for value in results.values() if value == True])
 # false_results = len(results) - true_results
 

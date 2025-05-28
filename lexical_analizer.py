@@ -19,7 +19,7 @@ def obtain_stripped_python_code(content, is_path=True):
     raw_code = content
     if is_path:
         if not os.path.exists(content) or not os.path.isfile(content):
-            raise FileNotFoundError(f"File at '{content}' does not exist or is not a file")
+            raise FileNotFoundError(f"Error: File at '{content}' does not exist or is not a file")
     
         with open(content, 'r') as file:
             raw_code = file.read()
