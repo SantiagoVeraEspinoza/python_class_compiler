@@ -123,9 +123,7 @@ The parser was run against each example to determine if it correctly identified 
 
 The effectiveness rate measures the overall accuracy of the parser:
 
-\[
-\text{Effectiveness} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{150 + 150}{150 + 150 + 0 + 0} = 1.0 \quad (100\%)
-\]
+![Effectiveness Formula](docs/images/effectiveness_formula.png)
 
 In code, the effectiveness calculation would be:
 
