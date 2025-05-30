@@ -52,12 +52,13 @@ def parse(content, is_path=True, hide_output=True, hide_errors=False):
     input_pos = 0
 
     if not hide_output: print(f"{'Stack':<35} {'Input':<80} {'Action'}")
-    while stack:
+    while stack: # Variable stack
         top = stack.pop()
         current_token = tokens[input_pos]
 
         if not hide_output: print(f"{str(stack):<35} {str([token[0:2] for token in tokens[input_pos:]]):<80} ", end='')
 
+        # If it reaches acceptance case
         if top == current_token == '$':
             if not hide_output: print("ACCEPT")
             return True
