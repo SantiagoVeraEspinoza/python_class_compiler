@@ -123,7 +123,7 @@ The parser was run against each example to determine if it correctly identified 
 
 The effectiveness rate measures the overall accuracy of the parser:
 
-![Effectiveness Formula](docs/images/effectiveness_formula.png)
+![Effectiveness Formula](docs/images/effectiveness_formula.jpg)
 
 In code, the effectiveness calculation would be:
 
