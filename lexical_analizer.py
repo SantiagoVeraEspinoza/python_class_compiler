@@ -8,7 +8,7 @@ TOKEN_PRIORITY  = [
     # Define header
     ('dfhdr',   r'(@([a-zA-Z_][a-zA-Z0-9_]*)(\.[a-zA-Z_][a-zA-Z0-9_]*)*(\(([^()]*)\))?)*def([a-zA-Z_][a-zA-Z0-9_]*)\(((\*{0,2}[a-zA-Z_][a-zA-Z0-9_]*(:[a-zA-Z_][a-zA-Z0-9_]*)?(=[\w\d\"\'\{\}\[\],]+)?)(,(\*{0,2}[a-zA-Z_][a-zA-Z0-9_]*(:[a-zA-Z_][a-zA-Z0-9_]*)?(=[\w\d\"\'\{\}\[\],]+)?))*)?\):'),
     # Class header
-    ('clshdr',  r'class([a-zA-Z_][a-zA-Z0-9_]*)(\((,?([a-zA-Z_][a-zA-Z0-9_]*)(\.([a-zA-Z_][a-zA-Z0-9_]*))*(=([a-zA-Z_][a-zA-Z0-9_]*)(\.([a-zA-Z_][a-zA-Z0-9_]*))*)?)+\))?:'),
+    ('clshdr',  r'class([a-zA-Z_][a-zA-Z0-9_]*)(\((([a-zA-Z_][a-zA-Z0-9_]*)(\.([a-zA-Z_][a-zA-Z0-9_]*))*(=([a-zA-Z_][a-zA-Z0-9_]*)(\.([a-zA-Z_][a-zA-Z0-9_]*))*)?,?)*\))?:'),
     ('code',    r'.+'),                                                                     # Code blocks
 ]
 
@@ -69,8 +69,8 @@ def tokenize(content, is_path=True, include_code=False):
 
     return tokens
 
-# code = obtain_stripped_python_code('examples/classful.py')
-# for token in tokenize(code):
+# tokens = tokenize('./errorPythonCompiler.txt')
+# for token in tokens:
 #     print(token[0], end=" ")
 
 

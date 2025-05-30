@@ -101,7 +101,7 @@ def parse_directory(path, hide_output=True, hide_errors=True):
 
     return parse_results
 
-# results = parse_directory('examples/oop')
+# results = parse_directory('examples/normal')
 # true_results = len([value for value in results.values() if value == True])
 # false_results = len(results) - true_results
 
